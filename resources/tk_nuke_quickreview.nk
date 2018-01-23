@@ -1,35 +1,35 @@
 set cut_paste_input [stack 0]
-version 9.0 v6
+version 10.5 v7
 push $cut_paste_input
 Group {
  name ShotgunQuickReview
  note_font Verdana
  selected true
- xpos -338
- ypos -49
+ xpos 468
+ ypos 708
  mapsize {0.15 0.15}
  addUserKnob {20 tanktab l "Shotgun Review"}
  addUserKnob {26 ""}
- addUserKnob {26 "" l "" +STARTLINE T "\nClick to create a Version and upload it to Shotgun."}
+ addUserKnob {26 "" T "\nClick to create a Version and upload it to Shotgun."}
  addUserKnob {26 ""}
- addUserKnob {22 "" l "Upload..." T "# have to gracefully support the case when \n# Sgtk is not in the system at all or when \n# running an incompatible version of Sgtk.\nimport nuke\ntry:\n  app = nuke.tk_nuke_quickreview\n  fn = app.create_review\nexcept Exception, e:\n  nuke.warning(\"Could not render Shotgun Quickreview! Most likely Toolkit is not currently active. Message: %s\" % e)\nelse:\n  fn(nuke.thisNode())\n\n" +STARTLINE}
+ addUserKnob {22 "" l Upload... T "# have to gracefully support the case when \n# Sgtk is not in the system at all or when \n# running an incompatible version of Sgtk.\nimport nuke\ntry:\n  app = nuke.tk_nuke_quickreview\n  fn = app.create_review\nexcept Exception, e:\n  nuke.warning(\"Could not render Shotgun Quickreview! Most likely Toolkit is not currently active. Message: %s\" % e)\nelse:\n  fn(nuke.thisNode())\n\n" +STARTLINE}
  addUserKnob {26 ""}
 }
  Input {
   inputs 0
   name Input1
   xpos -411
-  ypos -84
+  ypos -127
  }
  Text {
   message ""
   size 48
   yjustify top
   Transform 1
-  box {{40 40} {"\[value root.height]-40" 1516} 1000 1310}
+  box {{40 40 x1044 40} {"\[value root.height]-40" 1516 x1044 1112} 1264 800}
   name top_left_text
   xpos -411
-  ypos -44
+  ypos -46
  }
  Text {
   message "\[format %04d \[frame]]"
@@ -48,7 +48,7 @@ Group {
   xjustify right
   yjustify top
   Transform 1
-  box {{"\[value root.width]-40" 2008} {"\[value root.height]-40" 1516} 1050 1280}
+  box {{"\[value root.width]-40" 2008 x1044 2008} {"\[value root.height]-40" 1516 x1044 1112} 1050 968}
   name top_right_text
   xpos -411
   ypos 6
@@ -75,7 +75,7 @@ Group {
   leading 0.3
   yjustify center
   Transform 1
-  box {300 {"(\[value root.height]/2)-500"} 1800 1389}
+  box {300 {"(\[value root.height]/2)-500" x1044 76} 1800 1082}
   name slate_info
   xpos -556
   ypos 39
