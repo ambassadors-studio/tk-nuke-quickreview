@@ -23,7 +23,7 @@ Group {
  }
  Text {
   message ""
-  size 48
+  size 32
   yjustify top
   Transform 1
   box {{40 40 x1044 40} {"\[value root.height]-40" 1516 x1044 1112} 1264 800}
@@ -33,7 +33,7 @@ Group {
  }
  Text {
   message "\[format %04d \[frame]]"
-  size 48
+  size 32
   xjustify right
   yjustify bottom
   Transform 1
@@ -44,7 +44,7 @@ Group {
  }
  Text {
   message ""
-  size 48
+  size 32
   xjustify right
   yjustify top
   Transform 1
@@ -55,7 +55,7 @@ Group {
  }
  Text {
   message ""
-  size 48
+  size 32
   yjustify bottom
   Transform 1
   box {40 40 1000 240}
