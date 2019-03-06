@@ -1,11 +1,11 @@
 # Copyright (c) 2017 Shotgun Software Inc.
-# 
+#
 # CONFIDENTIAL AND PROPRIETARY
-# 
-# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit 
+#
+# This work is provided "AS IS" and subject to the Shotgun Pipeline Toolkit
 # Source Code License included in this distribution package. See LICENSE.
-# By accessing, using, copying or modifying this work you indicate your 
-# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights 
+# By accessing, using, copying or modifying this work you indicate your
+# agreement to the Shotgun Pipeline Toolkit Source Code License. All rights
 # not expressly granted therein are reserved by Shotgun Software Inc.
 
 import os
@@ -259,6 +259,18 @@ class Dialog(QtGui.QWidget):
 
         # turn on the node
         mov_out.knob("disable").setValue(False)
+
+        # Disable slate based on UI settings.
+        render_burnin = self.ui.burnin_groupbox.isChecked()
+        burnin_username = self.ui.username_checkbox.isChecked()
+        burnin_date = self.ui.date_checkbox.isChecked()
+        burnin_shot = self.ui.shotinfo_checkbox.isChecked()
+        burnin_frames = self.ui.frames_checkbox.isChecked()
+
+        self._group_node.node("top_right_text")['disable'].setValue(not (render_burnin and burnin_date))
+        self._group_node.node("top_left_text")['disable'].setValue(not (render_burnin and burnin_shot))
+        self._group_node.node("bottom_left_text")['disable'].setValue(not (render_burnin and burnin_username))
+        self._group_node.node("framecounter")['disable'].setValue(not (render_burnin and burnin_frames))
 
         # render everything - default to using the first view on stereo
         logger.debug("Rendering quicktime")

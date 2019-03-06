@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>495</width>
-    <height>430</height>
+    <width>483</width>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Shotgun Publish</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
-   <item>
+  <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="0">
     <widget class="QStackedWidget" name="stack_widget">
      <property name="currentIndex">
       <number>0</number>
@@ -56,7 +56,7 @@
         <widget class="QTextEdit" name="description"/>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
           <widget class="QLabel" name="frame_range">
            <property name="text">
@@ -109,12 +109,66 @@
          </item>
         </layout>
        </item>
+       <item>
+        <widget class="QGroupBox" name="burnin_groupbox">
+         <property name="title">
+          <string>Render Burn-ins</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="1">
+           <widget class="QCheckBox" name="date_checkbox">
+            <property name="text">
+             <string>Date</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="username_checkbox">
+            <property name="text">
+             <string>User name</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QCheckBox" name="shotinfo_checkbox">
+            <property name="text">
+             <string>Shot information</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="frames_checkbox">
+            <property name="text">
+             <string>Frames</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
       </layout>
       <zorder>description</zorder>
       <zorder>description_label</zorder>
       <zorder>context_widget</zorder>
       <zorder></zorder>
       <zorder>spacer_label</zorder>
+      <zorder>horizontalSpacer_5</zorder>
+      <zorder>burnin_groupbox</zorder>
      </widget>
      <widget class="QWidget" name="page_2">
       <layout class="QGridLayout" name="gridLayout">
@@ -257,14 +311,14 @@
      </widget>
     </widget>
    </item>
-   <item>
+   <item row="1" column="0">
     <widget class="Line" name="line">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
    </item>
-   <item>
+   <item row="2" column="0">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <spacer name="horizontalSpacer">
