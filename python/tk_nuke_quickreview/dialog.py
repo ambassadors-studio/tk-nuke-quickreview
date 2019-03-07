@@ -80,7 +80,6 @@ class Dialog(QtGui.QWidget):
 
         self._setup_playlist_dropdown()
 
-
     def _setup_playlist_dropdown(self):
         """
         Sets up the playlist dropdown widget
@@ -272,6 +271,14 @@ class Dialog(QtGui.QWidget):
         self._group_node.node("bottom_left_text")['disable'].setValue(not (render_burnin and burnin_username))
         self._group_node.node("framecounter")['disable'].setValue(not (render_burnin and burnin_frames))
 
+        if render_burnin:
+            # update font according to options
+            text_nodes = ["top_right_text", "top_left_text",
+                          "bottom_left_text", "framecounter"]
+            for text_node in text_nodes:
+                self._group_node.node(text_node).knob("color").setValue(1 if self.ui.fontcolor_combobox.currentIndex() == 0 else 0)
+                self._group_node.node(text_node).knob("size").setValue(self.ui.fontsize_spinbox.value())
+
         # render everything - default to using the first view on stereo
         logger.debug("Rendering quicktime")
         try:
@@ -368,15 +375,30 @@ class Dialog(QtGui.QWidget):
         # set metadata
         self._setup_formatting(version_name)
 
+        # Generate a better filename for when we download the source file
+        # from Shotgun.
+        mov_name = self._context.entity.get('name')
+        if self._context.step:
+            mov_name += "_" + self._context.step.get('name')
+        new_name = ""
+        for char in mov_name:
+            if char.lower() in "abcdefghijklmnopqrstuvwxyz0123456789_-":
+                new_name += char
+            else:
+                new_name += "_"
+        if not new_name:
+            new_name = "quickreview"
+        new_name += ".mov"
+
         # generate temp file for mov sequence
-        mov_path = os.path.join(tempfile.gettempdir(), "quickreview.mov")
+        mov_path = os.path.join(tempfile.gettempdir(), new_name)
         mov_path = sgtk.util.filesystem.get_unused_path(mov_path)
 
         # get frame ranges from ui
         try:
             start_frame = int(self.ui.start_frame.text())
             end_frame = int(self.ui.end_frame.text())
-        except Exception, e:
+        except Exception:
             raise ValueError("Could not determine frame range values from UI.")
 
         # and render!
